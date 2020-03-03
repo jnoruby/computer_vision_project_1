@@ -4,3 +4,7 @@ Pipfile.lock
 
 #virtualenv
 venv/
+
+#pycache
+__pycache__
+*.pyc
