@@ -5,6 +5,7 @@ def create_box_filter(n):
     # Enforce odd dimensions on filter, given even input by user
     if n % 2 == 0:
         n += 1
+    print("filter dimension is " + n + " by " + n) # temp test print
     # Create box filter g of size (n * n)
     return g
 
