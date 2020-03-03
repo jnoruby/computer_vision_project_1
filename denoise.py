@@ -10,8 +10,10 @@ lena = cv.imread('lena.png')
 cameraman = cv.imread('cameraman.png')
 multiplekeys = cv.imread('multiplekeys.png')
 
-# Show original Lena image
+# Show original images
 cv.imshow('original Lena',lena)
+cv.imshow('original cameraman', cameraman)
+cv.imshow('original multiple keys', multiplekeys)
 cv.waitKey(0)
 
 # Destroy all OpenCV windows
