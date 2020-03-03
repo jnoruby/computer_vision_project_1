@@ -7,8 +7,8 @@ def create_box_filter(n):
     # Enforce odd dimensions on filter, given even input by user
     if n % 2 == 0:
         n += 1
-    # Create zeroed box filter g of size (n * n)
-    g = np.zeros((n, n), dtype=float)
+    # Create box filter g of size (n * n)
+    g = np.full((n, n), 1 / (n * n), dtype=float)
     return g
 """
 def create_gaussian_filter(sigma):
