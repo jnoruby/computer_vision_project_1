@@ -5,10 +5,9 @@ def create_box_filter(n):
     # Enforce odd dimensions on filter, given even input by user
     if n % 2 == 0:
         n += 1
-    print("filter dimension is " + n + " by " + n) # temp test print
     # Create box filter g of size (n * n)
     return g
-
+"""
 def create_gaussian_filter(sigma):
     # The size (n * n) of our filter
     n = 2 * math.floor(3 * sigma) + 1
@@ -24,4 +23,5 @@ def convolution2D(f, I):
 def median_filtering(I, n):
     # Handle boundary of I, e.g. pad I according to size n
     # Denoise image with an (n * n) median filter 
-    return denoised_im
+    return denoised_im 
+"""
