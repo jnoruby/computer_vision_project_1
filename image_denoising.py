@@ -1,7 +1,10 @@
 #!/usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 def create_box_filter(n):
+    # Enforce odd dimensions on filter, given even input by user
+    if n % 2 == 0:
+        n += 1
     # Create box filter g of size (n * n)
     return g
 
