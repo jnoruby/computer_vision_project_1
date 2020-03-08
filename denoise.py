@@ -17,7 +17,9 @@ sigmas = ui.get_sigmas()
 
 # Get user-defined box filter size, round to nearest odd integer; report back
 box_filter_size = ui.get_box_filter_size()
-print("Filter sizes set to " + str(box_filter_size))
+print("Box filter size set to " + str(box_filter_size))
+gaussian_sigma = ui.get_gaussian_sigma()
+print("Gaussian distance set to " + str(gaussian_sigma))
 pad = denoise.calculate_pad(box_filter_size)
 print("Padding set to " + str(pad))
 

@@ -55,14 +55,12 @@ def create_gaussian_filter(sigma):
 def apply_gaussian_filter(im, pad, g):
     im_height = im.shape[0]
     im_width = im.shape[1]
-    im_gaussian_filtered = []
-    for y in range(im_height):
-        im_temp_y = np.copy(im)
-        im_temp_y = np.roll(im_temp_y, y - 1)
-        for x in range(im_width):
-            im_temp_x = np.copy(im_temp_y)
-            im_temp_x = np.roll(im_temp_x, x - 1) * g[y,x]
-            im_gaussian_filtered.append(im_temp_x)
+    im_box_filtered = im.copy()
+    for y in np.arange(pad, im_height - pad):
+        for x in np.arange(pad, im_width - pad):
+            sliding_window = im[y - pad: y + pad + 1, x - pad:x + pad + 1]
+            filtered_pixel = (sliding_window * g).sum()
+            im_box_filtered[y,x] = filtered_pixel
     return im_box_filtered
 
 """

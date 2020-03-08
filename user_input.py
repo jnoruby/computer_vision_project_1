@@ -17,11 +17,19 @@ def next_odd_integer(n):
 # Get box filter size, either from user or default with bad user input
 def get_box_filter_size():
     try:
-        box_filter_size = float(input("Set size of box and Gaussian filters (default: 3): "))
+        box_filter_size = float(input("Set size of box filter (default: 3): "))
         box_filter_size = next_odd_integer(box_filter_size)
     except ValueError:
         box_filter_size = 3
     return int(box_filter_size)
+
+# Get Gaussian sigma from user
+def get_gaussian_sigma():
+    try:
+        gaussian_sigma = float(input("Set size of Gaussian sigma (default: 3): "))
+    except ValueError:
+        gaussian_sigma = 3
+    return int(gaussian_sigma)
 
 # Get a list of three floats between 0 and 1 from user, for noise sigma
 def get_sigmas():
