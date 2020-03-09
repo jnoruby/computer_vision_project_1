@@ -1,8 +1,72 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os                   # getcwd()
 import math
 
+def get_image_path():
+    """
+    Gets user-defined string argument (allegedly file path); reports to console
+
+    :returns: used-defined string
+    """
+    fd = input("Enter image file path (default: lena.png): ") or "lena.png"
+    print("Image file path set to " + os.getcwd() + "/" + fd)
+    return fd
+
+def get_sigmas():
+    """
+    Gets a list of three floats between 0 and 1 from user; reports to console
+    
+    :returns: list of three Gaussian noise sigmas
+    """
+    sigmas = []
+    for i in range(0, 3):
+        input_str = input("Enter floating point value " + str(i + 1)
+                          + " (0 < f < 1:)")
+        if len(input_str) == 0:
+            sigma = (i + 1) / 10
+        else:
+            sigma = float(input("Enter floating point value " +
+                          str(i + 1) + " (0 < f < 1): "))
+        print("adding sigma = " + str(sigma))
+        sigmas.append(sigma)
+    return sigmas
+
+def get_box_filter_size():
+    """
+    Gets box filter size from user input (or default); reports to console
+
+    :returns: int
+    """
+    try:
+        box_filter_size = float(input("Set size of box filter (default: 3): "))
+        box_filter_size = next_odd_integer(box_filter_size)
+    except ValueError:
+        box_filter_size = 3
+    print("Box filter size set to " + str(box_filter_size))
+    return int(box_filter_size)
+
+def get_gaussian_sigma():
+    """
+    Gets Gaussian sigma from user input (or default); reports to console
+
+    :returns: int
+    """
+    try:
+        gaussian_sig = float(input("Set size of Gaussian sigma (default: 3): "))
+    except ValueError:
+        gaussian_sig = 3
+    print("Gaussian sigma set to " + str(gaussian_sig))
+    return int(gaussian_sig)
+
+def get_median_filter_size():
+    try:
+        median_filter_size = int(input("Set size of median filter: "))
+    except:
+        median_filter_size = 3
+    print("Median filter size set to " + str(median_filter_size))
+    return median_filter_size
 
 # Given numeric input that is not odd integer, round to next odd integer > 1
 def next_odd_integer(n):
@@ -13,36 +77,6 @@ def next_odd_integer(n):
     if n == 1:
         n += 2
     return n
-
-# Get box filter size, either from user or default with bad user input
-def get_box_filter_size():
-    try:
-        box_filter_size = float(input("Set size of box filter (default: 3): "))
-        box_filter_size = next_odd_integer(box_filter_size)
-    except ValueError:
-        box_filter_size = 3
-    return int(box_filter_size)
-
-# Get Gaussian sigma from user
-def get_gaussian_sigma():
-    try:
-        gaussian_sigma = float(input("Set size of Gaussian sigma (default: 3): "))
-    except ValueError:
-        gaussian_sigma = 3
-    return int(gaussian_sigma)
-
-# Get a list of three floats between 0 and 1 from user, for noise sigma
-def get_sigmas():
-    sigmas = []
-    for i in range(0, 3):
-        print(i)
-        input_str = input("Enter floating point value " + str(i + 1) + " (0 < f < 1:)")
-        if len(input_str) == 0:
-            sigmas.append((i + 1) / 10)
-        else:
-            sigmas.append(float(input("Enter floating point value " +
-                          str(i + 1) + " (0 < f < 1): ")))
-    return sigmas
 
 # Return list of 3 empty image files from user-defined sigmas, with file suffix
 def generate_image_fds(fd, sigmas, suffix_string):
