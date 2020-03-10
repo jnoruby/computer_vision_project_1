@@ -6,6 +6,12 @@ import numpy as np
 from skimage import color
 import image_denoising as denoise
 
+
+# Used for lab report
+from skimage.feature import match_template
+from skimage import data
+
+
 # Import key image for template matching assignment
 im = color.rgb2gray(cv.imread("multiplekeys.png"))
 
@@ -24,6 +30,11 @@ template_im = cv.imread("keytemplate.png")
 template_im = (template_im / 255.0 - 0.5) * 2 
 
 # Implement cross-correlation = Sum x,y of Image1(x,y) * Image2(x,y)
+# This is my own attempt to implement, parallel to how median filtering works.
+# As of near the due time, it was still running (hopefully correctly)
+# at a very slow speed to to really bad asympotic complexity
+# So for the lab report I used builtin functions.
+
 
 # Pad binary image to allow template image to pass at its edge
 top = bottom = edge_y = template_im.shape[0]
@@ -45,3 +56,7 @@ for x in range(edge_x, padded_binary_im.shape[0] - edge_x - 1):
         correlation_im[x][y] = pixel_total
 correlation_im - denoise.scale_image(binary_image, 0, 255)
 cv.imwrite("correlation_image_keys.png", correlation_im * 255)
+
+# Builtin function version for lab report
+correlation_im_builtin = match_template(padded_binary_im, template_im)
+print(correlation_im_builtin)
