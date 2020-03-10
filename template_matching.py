@@ -43,7 +43,7 @@ padded_binary_im = cv.copyMakeBorder(binary_image, top, bottom, left, right, cv.
 # Test pad with an imwrite call
 cv.imwrite("padded_binary_keys.png", padded_binary_im * 255)
 # Define correlation image
-correlation_im = [[0] * padded_binary_im.shape[0] for i in range(padded_binary_im.shape[1])]
+correlation_im = [2 * ([0] * padded_binary_im.shape[0]) for i in range(2 * padded_binary_im.shape[1])]
 
 # Pass template image over binary image as a sliding window, similar to median filter function
 for x in range(edge_x, padded_binary_im.shape[0] - edge_x - 1):
@@ -52,7 +52,7 @@ for x in range(edge_x, padded_binary_im.shape[0] - edge_x - 1):
         for k in range(0, template_im.shape[0]):
             for j in range(0, template_im.shape[1]):
                 pixel_total += template_im[k][j] * padded_binary_im[x][y]
-                print(str(x) + " " + str(y) + " " + str(k) + " " + str(j))
+                #print(str(x) + " " + str(y) + " " + str(k) + " " + str(j))
         correlation_im[x][y] = pixel_total
 correlation_im - denoise.scale_image(binary_image, 0, 255)
 cv.imwrite("correlation_image_keys.png", correlation_im * 255)
