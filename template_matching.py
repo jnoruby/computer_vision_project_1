@@ -52,9 +52,10 @@ for x in range(edge_x, padded_binary_im.shape[0] - edge_x - 1):
         for k in range(0, template_im.shape[0]):
             for j in range(0, template_im.shape[1]):
                 pixel_total += template_im[k][j] * padded_binary_im[x][y]
-                #print(str(x) + " " + str(y) + " " + str(k) + " " + str(j))
+                print(x)
         correlation_im[x][y] = pixel_total
-correlation_im - denoise.scale_image(binary_image, 0, 255)
+correlation_im = np.array(correlation_im)
+correlation_im = denoise.scale_image(correlation_im, 0, 255)
 cv.imwrite("correlation_image_keys.png", correlation_im * 255)
 
 # Builtin function version for lab report
